@@ -28,8 +28,8 @@ namespace MarketPlace
         {
             InitializeComponent();
             //DataContext = new BasketViewModel(new DbDataContext(new DataManager(new ProductRepository(new SQLiteDatabase()), new PurchaseRepository(new SQLiteDatabase()))));
-            //DataContext = new BasketViewModel(new WcfDataContext());
-            DataContext = new BasketViewModel(new WcfSelfHostDataContext());
+            DataContext = new BasketViewModel(new WcfDataContext());
+            //DataContext = new BasketViewModel(new WcfSelfHostDataContext());
         }
     }
 }

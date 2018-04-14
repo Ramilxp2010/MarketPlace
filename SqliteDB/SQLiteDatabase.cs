@@ -8,10 +8,19 @@ namespace MarketPlace.DB
     {
         private string dbFilePath = Environment.CurrentDirectory;
         private string dbFileName = "database.sqlite";
-
         private SQLiteConnection connection = null;
+        
+        public SQLiteDatabase(string dbFilePath, string dbFileName)
+        {
+            if (!string.IsNullOrEmpty(dbFilePath))
+                this.dbFilePath = dbFilePath;
 
-        private Exception exception;
+            if (!string.IsNullOrEmpty(dbFileName))
+                this.dbFileName = dbFileName;
+
+            ExtendendStatus = string.Empty;
+            this.Exception = null;
+        }
 
         public SQLiteDatabase(string dbFileName = null)
         {

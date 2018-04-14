@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using System.IO;
+using System.Web.Hosting;
 
 using MarketPlace.Model;
 using MarketPlace.Model.Entities;
@@ -18,7 +20,9 @@ namespace MarketPlace.Service.IISWcfService
 
         public MarketPlaceService()
         {
-            this.dataManager = new DataManager(new ProductRepository(new SQLiteDatabase()), new PurchaseRepository(new SQLiteDatabase()));
+            string dbFileName = "database.sqlite";
+            string dbFilePath = Path.Combine(HostingEnvironment.ApplicationPhysicalPath, "App_Data");
+            this.dataManager = new DataManager(new ProductRepository(new SQLiteDatabase(dbFilePath, dbFileName)), new PurchaseRepository(new SQLiteDatabase(dbFilePath, dbFileName)));
         }
 
         public IEnumerable<Product> GetProducts()

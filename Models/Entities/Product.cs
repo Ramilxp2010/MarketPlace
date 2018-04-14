@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Xml.Serialization;
 
 namespace MarketPlace.Model.Entities
 {
@@ -14,6 +15,7 @@ namespace MarketPlace.Model.Entities
         private string description;
         private decimal price;
 
+        [XmlAttribute]
         public string Id
         {
             get { return id; }
