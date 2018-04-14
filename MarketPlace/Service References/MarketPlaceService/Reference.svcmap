@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="d2485b71-d6e6-455a-82ce-1376ff6f15e9" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:32173/MarketPlaceService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="MarketPlaceService.xsd" MetadataType="Schema" ID="29425516-3153-487b-8a4e-2cc1823f73e0" SourceId="1" SourceUrl="http://localhost:32173/MarketPlaceService.svc?xsd=xsd2" />
+    <MetadataFile FileName="MarketPlaceService1.xsd" MetadataType="Schema" ID="ed5638fb-263d-46b2-ba87-692b925ad809" SourceId="1" SourceUrl="http://localhost:32173/MarketPlaceService.svc?xsd=xsd0" />
+    <MetadataFile FileName="MarketPlaceService.disco" MetadataType="Disco" ID="f16b87c1-d3cc-43f9-b80f-77230cc90d5b" SourceId="1" SourceUrl="http://localhost:32173/MarketPlaceService.svc?disco" />
+    <MetadataFile FileName="MarketPlaceService2.xsd" MetadataType="Schema" ID="838a25e3-74eb-452c-93b9-016a6832f3f3" SourceId="1" SourceUrl="http://localhost:32173/MarketPlaceService.svc?xsd=xsd1" />
+    <MetadataFile FileName="MarketPlaceService.wsdl" MetadataType="Wsdl" ID="fd538538-ddee-4d4d-bd82-1b53dddb6482" SourceId="1" SourceUrl="http://localhost:32173/MarketPlaceService.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
