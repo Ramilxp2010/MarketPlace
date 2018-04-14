@@ -30,17 +30,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SQLite-net">
+      <HintPath>..\SqliteDB\bin\Debug\SQLite-net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Purchase.cs" />
     <Compile Include="Interface\IProductRepository.cs" />
     <Compile Include="Interface\IPurchaseRepository.cs" />
     <Compile Include="Entities\Basket.cs" />
     <Compile Include="DataManager.cs" />
     <Compile Include="Entities\Product.cs" />
-    <Compile Include="Entities\Purchase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

@@ -1,37 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using SQLite;
+using System;
+using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
-using MarketPlace.Model;
 
 namespace MarketPlace.Model.Entities
 {
     public class Purchase
     {
-        [XmlAttribute]
+        [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        public List<Product> Products { get; set; }
-
-        [XmlIgnore]
+        
+        [Ignore]
         public DateTime Date { get; set; }
 
-        [XmlElement("Date")]
+        [Column("Date")]
         public string DateString
         {
             get { return this.Date.ToString("yyyy-MM-dd HH:mm:ss"); }
             set { this.Date = DateTime.Parse(value); }
         }
+        public string Content { get; set; }
 
-        public decimal TotalPrice { get; set; }
-
-        public Purchase(){}
-        public Purchase(DateTime date, Product[] products)
+        public Purchase() { }
+        public Purchase(Basket basket, DateTime date)
         {
-            Products = new List<Product>(products);
             Date = date;
-            TotalPrice = products.Sum(x => x.Price);
+            Content = XmlSerializeBasket(basket);
+        }
+
+        public string XmlSerializeBasket(Basket basket)
+        {
+            var serializer = new XmlSerializer(typeof(Basket));
+            var sb = new StringBuilder();
+
+            using (TextWriter writer = new StringWriter(sb))
+            {
+                serializer.Serialize(writer, basket);
+            }
+
+            return sb.ToString();
         }
     }
 }

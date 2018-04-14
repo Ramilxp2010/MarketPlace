@@ -12,6 +12,6 @@ namespace MarketPlace.Model.Interface
     {
         IEnumerable<Purchase> Purchases();
         Purchase GetPurchase(int id);
-        void InsertPurchase(DateTime date, string content);
+        void CreatePurchase(Purchase purchase);
     }
 }

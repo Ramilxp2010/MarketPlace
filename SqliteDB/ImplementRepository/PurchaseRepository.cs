@@ -27,7 +27,7 @@ namespace MarketPlace.DB.Implement
             try
             {
                 Db.OpenConnection();
-                string query = "SELECT * FROM Purchases";
+                string query = "SELECT * FROM Purchase";
                 using (SQLiteCommand cmd = new SQLiteCommand(query, Db.Connection))
                 {
                     using (SQLiteDataReader reader = cmd.ExecuteReader())
@@ -35,9 +35,10 @@ namespace MarketPlace.DB.Implement
                         List<Purchase> purshases = new List<Purchase>();
                         while (reader.Read())
                         {
+                            int id = Int32.Parse(reader["Id"].ToString());
+                            string date = reader["Date"].ToString();
                             string content = reader["Content"].ToString();
-                            Purchase purchase = XMLDeserializePurchase(content);
-                            purshases.Add(purchase);
+                            purshases.Add(new Purchase { Id = id, Date = DateTime.Parse(date), Content = content });
                         }
                         return purshases;
                     }
@@ -59,15 +60,17 @@ namespace MarketPlace.DB.Implement
             {
                 Purchase purchase = null;
                 Db.OpenConnection();
-                string query = "SELECT * FROM Purchases WHERE Id = " + id;
+                string query = "SELECT * FROM Purchase WHERE Id = " + id;
                 using (SQLiteCommand cmd = new SQLiteCommand(query, Db.Connection))
                 {
                     using (SQLiteDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
+                            int purchaseId = Int32.Parse(reader["Id"].ToString());
+                            string date = reader["Date"].ToString();
                             string content = reader["Content"].ToString();
-                            purchase = XMLDeserializePurchase(content);
+                            purchase = new Purchase { Id = id, Date = DateTime.Parse(date), Content = content };
                         }
                     }
                 }
@@ -83,15 +86,15 @@ namespace MarketPlace.DB.Implement
             }
         }
 
-        public void InsertPurchase(DateTime date, string content)
+        public void CreatePurchase(Purchase purchase)
         {
             try
             {
                 Db.OpenConnection();
-                using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO Purchases (Date, Content) VALUES (@Date, @Content)", Db.Connection))
+                using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO Purchase (Date, Content) VALUES (@Date, @Content)", Db.Connection))
                 {
-                    cmd.Parameters.Add(new SQLiteParameter("@Date", DbType.DateTime2){ Value = date });
-                    cmd.Parameters.Add(new SQLiteParameter("@Content", DbType.String) { Value = content });
+                    cmd.Parameters.Add(new SQLiteParameter("@Date", DbType.DateTime2){ Value = purchase.Date });
+                    cmd.Parameters.Add(new SQLiteParameter("@Content", DbType.String) { Value = purchase.Content });
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -112,7 +115,7 @@ namespace MarketPlace.DB.Implement
                 Db.OpenConnection();
                 string createQuery =
                     @"CREATE TABLE IF NOT EXISTS
-                    [Purchases](
+                    [Purchase](
 	                [Id]	        INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 	                [Date]	        TEXT,
 	                [Content]	    TEXT)";
@@ -131,17 +134,6 @@ namespace MarketPlace.DB.Implement
             {
                 Db.CloseConnection();
             }
-        }
-
-        private Purchase XMLDeserializePurchase(string content)
-        {
-            Purchase result = null;
-            XmlSerializer serializer = new XmlSerializer(typeof(Purchase));            
-            using (TextReader reader = new StringReader(content))
-            {
-                result = serializer.Deserialize(reader) as Purchase;
-            }
-            return result;
         }
     }
 }

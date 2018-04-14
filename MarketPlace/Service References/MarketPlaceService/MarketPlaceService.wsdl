@@ -4,26 +4,14 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:32173/MarketPlaceService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:32173/MarketPlaceService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:32173/MarketPlaceService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/MarketPlace.Model" />
+      <xsd:import schemaLocation="http://localhost:32173/MarketPlaceService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/MarketPlace.Model.Entities" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IMarketPlaceService_GetProducts_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetProducts" />
-  </wsdl:message>
-  <wsdl:message name="IMarketPlaceService_GetProducts_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetProductsResponse" />
-  </wsdl:message>
   <wsdl:message name="IMarketPlaceService_GetProduct_InputMessage">
     <wsdl:part name="parameters" element="tns:GetProduct" />
   </wsdl:message>
   <wsdl:message name="IMarketPlaceService_GetProduct_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetProductResponse" />
-  </wsdl:message>
-  <wsdl:message name="IMarketPlaceService_CreateProduct_InputMessage">
-    <wsdl:part name="parameters" element="tns:CreateProduct" />
-  </wsdl:message>
-  <wsdl:message name="IMarketPlaceService_CreateProduct_OutputMessage">
-    <wsdl:part name="parameters" element="tns:CreateProductResponse" />
   </wsdl:message>
   <wsdl:message name="IMarketPlaceService_CreatePurchase_InputMessage">
     <wsdl:part name="parameters" element="tns:CreatePurchase" />
@@ -32,17 +20,9 @@
     <wsdl:part name="parameters" element="tns:CreatePurchaseResponse" />
   </wsdl:message>
   <wsdl:portType name="IMarketPlaceService">
-    <wsdl:operation name="GetProducts">
-      <wsdl:input wsaw:Action="http://tempuri.org/IMarketPlaceService/GetProducts" message="tns:IMarketPlaceService_GetProducts_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IMarketPlaceService/GetProductsResponse" message="tns:IMarketPlaceService_GetProducts_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="GetProduct">
       <wsdl:input wsaw:Action="http://tempuri.org/IMarketPlaceService/GetProduct" message="tns:IMarketPlaceService_GetProduct_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMarketPlaceService/GetProductResponse" message="tns:IMarketPlaceService_GetProduct_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="CreateProduct">
-      <wsdl:input wsaw:Action="http://tempuri.org/IMarketPlaceService/CreateProduct" message="tns:IMarketPlaceService_CreateProduct_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IMarketPlaceService/CreateProductResponse" message="tns:IMarketPlaceService_CreateProduct_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreatePurchase">
       <wsdl:input wsaw:Action="http://tempuri.org/IMarketPlaceService/CreatePurchase" message="tns:IMarketPlaceService_CreatePurchase_InputMessage" />
@@ -51,26 +31,8 @@
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IMarketPlaceService" type="tns:IMarketPlaceService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="GetProducts">
-      <soap:operation soapAction="http://tempuri.org/IMarketPlaceService/GetProducts" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="GetProduct">
       <soap:operation soapAction="http://tempuri.org/IMarketPlaceService/GetProduct" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="CreateProduct">
-      <soap:operation soapAction="http://tempuri.org/IMarketPlaceService/CreateProduct" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

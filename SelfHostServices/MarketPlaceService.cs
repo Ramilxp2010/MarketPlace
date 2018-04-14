@@ -11,6 +11,7 @@ using MarketPlace.Model.Entities;
 using MarketPlace.Model.Interface;
 using MarketPlace.DB;
 using MarketPlace.DB.Implement;
+using MarketPlace.DB.SqliteDB;
 
 namespace MarketPlace.Service.SelfHostService
 {
@@ -19,27 +20,22 @@ namespace MarketPlace.Service.SelfHostService
     {
         private DataManager dataManager;
 
-        public MarketPlaceService()
+        public MarketPlaceService(/*DataManager dataManager*/)
         {
-            this.dataManager = new DataManager(new ProductRepository(new SQLiteDatabase()), new PurchaseRepository(new SQLiteDatabase()));
-        }
+            //this.dataManager = new DataManager(new ProductRepository(new SQLiteDatabase()), new PurchaseRepository(new SQLiteDatabase()));
 
-        public IEnumerable<Product> GetProducts()
-        {
-            return dataManager.Products.GetProducts();
+            // Нужно будет доработать ProductRepositoryBySqliteNet и PurchaseRepositoryBySqliteNet. И попробовать внедрения зависимостей
+            this.dataManager = new DataManager(new ProductRepositoryBySqliteNet(), new PurchaseRepositoryBySqliteNet());
         }
+        
         public Product GetProduct(string id)
         {
             return dataManager.Products.GetProduct(id);
         }
-        public void CreateProduct(string id, string description, decimal price)
-        {
-            dataManager.Products.CreateProduct(id, description, price);
-        }
 
-        public void CreatePurchase(DateTime date, string content)
+        public void CreatePurchase(Purchase purchase)
         {
-            dataManager.Purchases.InsertPurchase(date, content);
+            dataManager.Purchases.CreatePurchase(purchase);
         }
     }
 }

@@ -12,6 +12,6 @@ namespace MarketPlace.Model.Interface
     {
         IEnumerable<Product> GetProducts();
         Product GetProduct(string id);
-        void CreateProduct(string id, string description, decimal price);
+        void CreateProduct(Product product);
     }
 }

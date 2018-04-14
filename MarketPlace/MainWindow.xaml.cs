@@ -27,7 +27,7 @@ namespace MarketPlace
         public MainWindow()
         {
             InitializeComponent();
-            //DataContext = new BasketViewModel(new DbDataContext(new DataManager(new ProductRepository(new SQLiteDatabase()), new PurchaseRepository(new SQLiteDatabase()))));
+            //DataContext = new BasketViewModel(new DbDataContext( new DataManager(new ProductRepositoryBySqliteNet(), new PurchaseRepositoryBySqliteNet()))));
             DataContext = new BasketViewModel(new WcfDataContext());
             //DataContext = new BasketViewModel(new WcfSelfHostDataContext());
         }

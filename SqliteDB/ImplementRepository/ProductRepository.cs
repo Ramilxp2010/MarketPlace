@@ -27,7 +27,7 @@ namespace MarketPlace.DB.Implement
             try
             {
                 Db.OpenConnection();
-                string query = "SELECT * FROM Items";
+                string query = "SELECT * FROM Product";
                 using (SQLiteCommand cmd = new SQLiteCommand(query, Db.Connection))
                 {
                     using (SQLiteDataReader reader = cmd.ExecuteReader())
@@ -61,7 +61,7 @@ namespace MarketPlace.DB.Implement
             {
                 Product product = null;
                 Db.OpenConnection();
-                string query = "SELECT * FROM Items WHERE Id = " + id;
+                string query = "SELECT * FROM Product WHERE Id = " + id;
                 using (SQLiteCommand cmd = new SQLiteCommand(query, Db.Connection))
                 {
                     using (SQLiteDataReader reader = cmd.ExecuteReader())
@@ -87,12 +87,7 @@ namespace MarketPlace.DB.Implement
                 Db.CloseConnection();
             }
         }
-
-        public void CreateProduct(string id, string description, decimal price)
-        {
-            Product product = new Product { Id = id, Description = description, Price = price };
-            CreateProduct(product);
-        }
+        
         public void CreateProduct(Product product)
         {
             Product oldProduct = GetProduct(product.Id);
@@ -102,11 +97,10 @@ namespace MarketPlace.DB.Implement
             try
             {
                 Db.OpenConnection();
-                using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO Items (Id, Desciption, Price) VALUES (?,?,?)", Db.Connection))
+                using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO Product (Description, Price) VALUES (@Description, @Price)", Db.Connection))
                 {
-                    cmd.Parameters.Add(product.Id);
-                    cmd.Parameters.Add(product.Description);
-                    cmd.Parameters.Add(product.Price);
+                    cmd.Parameters.Add(new SQLiteParameter("@Description", DbType.String) { Value = product.Description });
+                    cmd.Parameters.Add(new SQLiteParameter("@Price", DbType.Decimal) { Value = product.Price });
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -127,7 +121,7 @@ namespace MarketPlace.DB.Implement
                 Db.OpenConnection();
                 string createQuery =
                     @"CREATE TABLE IF NOT EXISTS
-                    [Items](
+                    [Product](
 	                [Id]	        TEXT NOT NULL UNIQUE PRIMARY KEY,
 	                [Description]	TEXT,
 	                [Price]	        REAL)";

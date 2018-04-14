@@ -13,15 +13,9 @@ namespace MarketPlace.Service.SelfHostService
     public interface IMarketPlaceService
     {
         [OperationContract]
-        IEnumerable<Product> GetProducts();
-
-        [OperationContract]
         Product GetProduct(string id);
-
+        
         [OperationContract]
-        void CreateProduct(string id, string description, decimal price);
-
-        [OperationContract]
-        void CreatePurchase(DateTime date, string content);
+        void CreatePurchase(Purchase purchase);
     }
 }

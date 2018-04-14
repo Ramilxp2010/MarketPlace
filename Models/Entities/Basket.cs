@@ -5,12 +5,14 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Xml.Serialization;
 
 namespace MarketPlace.Model.Entities
 {
     public class Basket : INotifyPropertyChanged
     {
-        private List<Product> products = new List<Product>();
+        [XmlElement("Product")]
+        public List<Product> products = new List<Product>();
         public IEnumerable<Product> Products
         {
             get { return products; }
@@ -18,6 +20,7 @@ namespace MarketPlace.Model.Entities
         public decimal TotalPrice
         {
             get { return products.Sum(e => e.Price); }
+            set { }
         }
 
         public void AddProduct(Product product)

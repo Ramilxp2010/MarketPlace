@@ -29,23 +29,9 @@ namespace MarketPlace.Client.Command
                 return;
 
             DateTime date = DateTime.Now;
-            Purchase purchase = new Purchase(date, BasketVM.Products.ToArray());
-            string content = XmlSerializePurshase(purchase);
-            BasketVM.dataContext.CreatePurchase(date, content);
+            Purchase purchase = new Purchase(BasketVM.Basket, date);
+            BasketVM.dataContext.CreatePurchase(purchase);
             BasketVM.Basket.ClearBasket();
-        }
-
-        public static string XmlSerializePurshase(Purchase purchase)
-        {
-            var serializer = new XmlSerializer(typeof(Purchase));
-            var sb = new StringBuilder();
-
-            using (TextWriter writer = new StringWriter(sb))
-            {
-                serializer.Serialize(writer, purchase);
-            }
-
-            return sb.ToString();
         }
     }
 }

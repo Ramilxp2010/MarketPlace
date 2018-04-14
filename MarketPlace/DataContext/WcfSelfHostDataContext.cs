@@ -18,23 +18,14 @@ namespace MarketPlace.Client.DataContext
         {
             client = new MarketPlaceServiceClient("BasicHttpBinding_IMarketPlaceService1");
         }
-
-        public IEnumerable<Product> GetProducts()
-        {
-            return client.GetProducts();
-        }
+        
         public Product GetProduct(string id)
         {
             return client.GetProduct(id);
         }
-        public void CreateProduct(string id, string description, decimal price)
+        public void CreatePurchase(Purchase purchase)
         {
-            client.CreateProduct(id, description, price);
-        }
-
-        public void CreatePurchase(DateTime date, string content)
-        {
-            client.CreatePurchase(date, content);
+            client.CreatePurchase(purchase);
         }
     }
 }

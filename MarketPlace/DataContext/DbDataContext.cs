@@ -22,22 +22,14 @@ namespace MarketPlace.Client.DataContext
             this.dataManager = dataManager;
         }
 
-        public IEnumerable<Product> GetProducts()
-        {
-            return dataManager.Products.GetProducts();
-        }
         public Product GetProduct(string id)
         {
             return dataManager.Products.GetProduct(id);
         }
-        public void CreateProduct(string id, string description, decimal price)
-        {
-            dataManager.Products.CreateProduct(id, description, price);
-        }
 
-        public void CreatePurchase(DateTime date, string content)
+        public void CreatePurchase(Purchase purchase)
         {
-            dataManager.Purchases.InsertPurchase(date, content);
+            dataManager.Purchases.CreatePurchase(purchase);
         }
     }
 }
