@@ -6,9 +6,8 @@ using System.Web.SessionState;
 
 namespace WcfService
 {
-    public class Global
+    public class Global : HttpApplication
     {
-
         protected void Application_Start(object sender, EventArgs e)
         {
 

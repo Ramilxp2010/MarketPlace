@@ -27,8 +27,6 @@ namespace MarketPlace.Client.Command
         public override void Execute(object parameter)
         {
             string code = parameter as string;
-
-            Message error = null;
             Product product = BasketVM.dataContext.GetProduct(code);
             if (product != null)
             {

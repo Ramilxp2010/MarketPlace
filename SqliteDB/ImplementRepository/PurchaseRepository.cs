@@ -125,7 +125,7 @@ namespace MarketPlace.DB.Implement
             }
             catch (Exception ex)
             {
-
+                throw new Exception(ex.Message);
             }
             finally
             {

@@ -19,7 +19,16 @@ namespace MarketPlace
 
         void OnDispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            var errorMessage = string.Format("An exception occurred: {0}", e.Exception.Message);
+            string errorMessage;
+            if (e.Exception is System.ServiceModel.ProtocolException)
+            {
+                errorMessage = string.Format("No connection to the server");
+            }
+            else
+            {
+                errorMessage = string.Format("An exception occurred: {0}", e.Exception.Message);
+            }
+
             MessageBox.Show(errorMessage, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             e.Handled = true;
         } 
