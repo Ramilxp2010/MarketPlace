@@ -1,9 +1,5 @@
 ﻿using System;
-using System.IO;
 using System.Data;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
 using System.Collections.Generic;
 using System.Data.SQLite;
 
@@ -27,8 +23,7 @@ namespace MarketPlace.DB.Implement
             try
             {
                 Db.OpenConnection();
-                string query = "SELECT * FROM Purchase";
-                using (SQLiteCommand cmd = new SQLiteCommand(query, Db.Connection))
+                using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM Purchase", Db.Connection))
                 {
                     using (SQLiteDataReader reader = cmd.ExecuteReader())
                     {
@@ -44,9 +39,9 @@ namespace MarketPlace.DB.Implement
                     }
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                throw new Exception(ex.Message);
+                throw;
             }
             finally
             {
@@ -60,9 +55,9 @@ namespace MarketPlace.DB.Implement
             {
                 Purchase purchase = null;
                 Db.OpenConnection();
-                string query = "SELECT * FROM Purchase WHERE Id = " + id;
-                using (SQLiteCommand cmd = new SQLiteCommand(query, Db.Connection))
+                using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM Purchase WHERE Id = @Id", Db.Connection))
                 {
+                    cmd.Parameters.Add(new SQLiteParameter("@Id", DbType.Int32) { Value = id});
                     using (SQLiteDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -76,9 +71,9 @@ namespace MarketPlace.DB.Implement
                 }
                 return purchase;
             }
-            catch (Exception ex)
+            catch
             {
-                throw new Exception(ex.Message);
+                throw;
             }
             finally
             {
@@ -98,9 +93,9 @@ namespace MarketPlace.DB.Implement
                     cmd.ExecuteNonQuery();
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                throw new Exception(ex.Message);
+                throw;
             }
             finally
             {
@@ -126,9 +121,9 @@ namespace MarketPlace.DB.Implement
                     cmd.ExecuteNonQuery();
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                throw new Exception(ex.Message);
+                throw;
             }
             finally
             {

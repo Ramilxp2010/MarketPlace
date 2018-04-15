@@ -17,12 +17,12 @@ namespace MarketPlace.Client.Command
     {
         public BuyCommand(BasketViewModel basketVM)
             :base(basketVM) {}
-
+        
         public override bool CanExecute(object parameter)
         {
             return true;
         }
-
+        
         public override void Execute(object parameter)
         {
             if (BasketVM.Products.Count == 0)

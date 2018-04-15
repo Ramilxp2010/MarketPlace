@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Data;
-using System.Text;
 using System.Data.SQLite;
-using System.Threading.Tasks;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
-
 using MarketPlace.Model.Entities;
 using MarketPlace.Model.Interface;
 
@@ -27,8 +21,7 @@ namespace MarketPlace.DB.Implement
             try
             {
                 Db.OpenConnection();
-                string query = "SELECT * FROM Product";
-                using (SQLiteCommand cmd = new SQLiteCommand(query, Db.Connection))
+                using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM Product", Db.Connection))
                 {
                     using (SQLiteDataReader reader = cmd.ExecuteReader())
                     {
@@ -45,9 +38,9 @@ namespace MarketPlace.DB.Implement
                     }
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                throw new Exception(ex.Message);
+                throw;
             }
             finally
             {
@@ -61,9 +54,9 @@ namespace MarketPlace.DB.Implement
             {
                 Product product = null;
                 Db.OpenConnection();
-                string query = "SELECT * FROM Product WHERE Id = " + id;
-                using (SQLiteCommand cmd = new SQLiteCommand(query, Db.Connection))
+                using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM Product WHERE Id = @Id", Db.Connection))
                 {
+                    cmd.Parameters.Add(new SQLiteParameter("@Id", DbType.String) { Value = id });
                     using (SQLiteDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -78,9 +71,9 @@ namespace MarketPlace.DB.Implement
                 }
                 return product;
             }
-            catch (Exception ex)
+            catch
             {
-                throw new Exception(ex.Message);
+                throw;
             }
             finally
             {
@@ -104,9 +97,9 @@ namespace MarketPlace.DB.Implement
                     cmd.ExecuteNonQuery();
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                throw new Exception(ex.Message);
+                throw;
             }
             finally
             {
@@ -132,9 +125,9 @@ namespace MarketPlace.DB.Implement
                     cmd.ExecuteNonQuery();
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                throw new Exception(ex.Message);
+                throw;
             }
             finally
             {

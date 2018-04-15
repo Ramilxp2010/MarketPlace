@@ -1,8 +1,6 @@
-﻿using SQLite;
+﻿using Newtonsoft.Json;
+using SQLite;
 using System;
-using System.IO;
-using System.Text;
-using System.Xml.Serialization;
 
 namespace MarketPlace.Model.Entities
 {
@@ -26,20 +24,7 @@ namespace MarketPlace.Model.Entities
         public Purchase(Basket basket, DateTime date)
         {
             Date = date;
-            Content = XmlSerializeBasket(basket);
-        }
-
-        public string XmlSerializeBasket(Basket basket)
-        {
-            var serializer = new XmlSerializer(typeof(Basket));
-            var sb = new StringBuilder();
-
-            using (TextWriter writer = new StringWriter(sb))
-            {
-                serializer.Serialize(writer, basket);
-            }
-
-            return sb.ToString();
+            Content = JsonConvert.SerializeObject(basket, Formatting.Indented);
         }
     }
 }

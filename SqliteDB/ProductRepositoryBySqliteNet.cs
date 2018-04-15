@@ -1,9 +1,6 @@
 ﻿using MarketPlace.Model.Interface;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MarketPlace.Model.Entities;
 using SQLite;
 using System.IO;
@@ -16,16 +13,20 @@ namespace MarketPlace.DB.SqliteDB
 
         public ProductRepositoryBySqliteNet()
         {
-            SQLiteConnection db = new SQLiteConnection(databasePath);
-            db.CreateTable<Product>();
-            db.Close();
+            using (SQLiteConnection db = new SQLiteConnection(databasePath))
+            {
+                db.CreateTable<Product>();
+                db.Close();
+            }
         }
         public ProductRepositoryBySqliteNet(string databasePath)
         {
             this.databasePath = databasePath;
-            var db = new SQLiteConnection(databasePath);
-            db.CreateTable<Purchase>();
-            db.Close();
+            using (SQLiteConnection db = new SQLiteConnection(databasePath))
+            {
+                db.CreateTable<Product>();
+                db.Close();
+            }
         }
 
         public Product GetProduct(string id)
@@ -39,9 +40,9 @@ namespace MarketPlace.DB.SqliteDB
                     return product;
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                throw new Exception(ex.Message);
+                throw;
             }
         }
 
@@ -55,9 +56,9 @@ namespace MarketPlace.DB.SqliteDB
                     db.Close();
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                throw new Exception(ex.Message);
+                throw;
             }
         }
 
@@ -72,9 +73,9 @@ namespace MarketPlace.DB.SqliteDB
                     return products;
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                throw new Exception(ex.Message);
+                throw;
             }
         }
         

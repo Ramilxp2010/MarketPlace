@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.Text;
+﻿using System.ServiceModel;
 
 using MarketPlace.Model;
 using MarketPlace.Model.Entities;
-using MarketPlace.Model.Interface;
 using MarketPlace.DB;
-using MarketPlace.DB.Implement;
 using MarketPlace.DB.SqliteDB;
+using MarketPlace.DB.Implement;
+using System.IO;
+using System;
 
 namespace MarketPlace.Service.SelfHostService
 {
@@ -20,14 +15,22 @@ namespace MarketPlace.Service.SelfHostService
     {
         private DataManager dataManager;
 
-        public MarketPlaceService(/*DataManager dataManager*/)
+        public MarketPlaceService()
         {
-            //this.dataManager = new DataManager(new ProductRepository(new SQLiteDatabase()), new PurchaseRepository(new SQLiteDatabase()));
+            string dbPathName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string dbFileName = "database.sqlite";
+            string databasePath = Path.Combine(dbPathName, dbFileName);
 
-            // Нужно будет доработать ProductRepositoryBySqliteNet и PurchaseRepositoryBySqliteNet. И попробовать внедрения зависимостей
-            this.dataManager = new DataManager(new ProductRepositoryBySqliteNet(), new PurchaseRepositoryBySqliteNet());
+            //Реализация с использованием Sqlite-net-pcl
+            this.dataManager = new DataManager(new ProductRepositoryBySqliteNet(databasePath), new PurchaseRepositoryBySqliteNet(databasePath));
+            
+            //Реализация с использованием System.Data.SQLite
+            /*SQLiteDatabase sqliteDatabase = new SQLiteDatabase(dbPathName, dbFileName);
+            IProductRepository productRepository = new ProductRepository(sqliteDatabase);
+            IPurchaseRepository purchaseRepository = new PurchaseRepository(sqliteDatabase);
+            this.dataManager = new DataManager(productRepository, purchaseRepository);*/
         }
-        
+
         public Product GetProduct(string id)
         {
             return dataManager.Products.GetProduct(id);

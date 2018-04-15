@@ -64,6 +64,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="DataContext\WcfDataContext.cs" />
+    <Compile Include="Validation\ProductCodeValidationRule.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -19,13 +19,20 @@ namespace MarketPlace.Service.IISWcfService
     {
         private DataManager dataManager;
 
-        public MarketPlaceService(/*DataManager dataManager*/)
+        public MarketPlaceService()
         {
-
-            //this.dataManager = new DataManager(new ProductRepository(new SQLiteDatabase()), new PurchaseRepository(new SQLiteDatabase()));
-
-            // Нужно будет доработать ProductRepositoryBySqliteNet и PurchaseRepositoryBySqliteNet. И попробовать внедрения зависимостей
-            this.dataManager = new DataManager(new ProductRepositoryBySqliteNet(), new PurchaseRepositoryBySqliteNet());
+            string dbPathName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string dbFileName = "database.sqlite";
+            string databasePath = Path.Combine(dbPathName, dbFileName);
+            
+            //Реализация с использованием Sqlite-net-pcl
+            this.dataManager = new DataManager(new ProductRepositoryBySqliteNet(databasePath), new PurchaseRepositoryBySqliteNet(databasePath));
+            
+            //Реализация с использованием System.Data.SQLite
+            /*SQLiteDatabase sqliteDatabase = new SQLiteDatabase(dbPathName, dbFileName);
+            IProductRepository productRepository = new ProductRepository(sqliteDatabase);
+            IPurchaseRepository purchaseRepository = new PurchaseRepository(sqliteDatabase);
+            this.dataManager = new DataManager(productRepository, purchaseRepository);*/
         }
 
         public Product GetProduct(string id)

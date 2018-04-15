@@ -1,26 +1,26 @@
-﻿using System;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.ComponentModel;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace MarketPlace.Model.Entities
 {
     public class Basket : INotifyPropertyChanged
     {
-        [XmlElement("Product")]
-        public List<Product> products = new List<Product>();
+        [JsonProperty(PropertyName = "Products")]
+        private List<Product> products = new List<Product>();
+
+        [JsonIgnore]
         public IEnumerable<Product> Products
         {
             get { return products; }
         }
+        
+        [JsonProperty(PropertyName = "TotalPrice")]
         public decimal TotalPrice
         {
             get { return products.Sum(e => e.Price); }
-            set { }
         }
 
         public void AddProduct(Product product)

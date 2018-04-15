@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SQLite;
 using System.IO;
 using MarketPlace.Model.Entities;
@@ -16,16 +13,20 @@ namespace MarketPlace.DB.SqliteDB
 
         public PurchaseRepositoryBySqliteNet()
         {
-            SQLiteConnection db = new SQLiteConnection(databasePath);
-            //db.CreateTable<Purchase>();
-            db.Close();
+            using (SQLiteConnection db = new SQLiteConnection(databasePath))
+            {
+                db.CreateTable<Purchase>();
+                db.Close();
+            }
         }
         public PurchaseRepositoryBySqliteNet(string databasePath)
         {
             this.databasePath = databasePath;
-            var db = new SQLiteConnection(databasePath);
-            db.CreateTable<Purchase>();
-            db.Close();
+            using (SQLiteConnection db = new SQLiteConnection(databasePath))
+            {
+                db.CreateTable<Purchase>();
+                db.Close();
+            }
         }
         
         public Purchase GetPurchase(int id)
@@ -39,9 +40,9 @@ namespace MarketPlace.DB.SqliteDB
                     return purchase;
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                throw new Exception(ex.Message);
+                throw;
             }
         }
 
@@ -55,9 +56,9 @@ namespace MarketPlace.DB.SqliteDB
                     db.Close();
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                throw new Exception(ex.Message);
+                throw;
             }
         }
 
@@ -72,9 +73,9 @@ namespace MarketPlace.DB.SqliteDB
                     return purchases;
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                throw new Exception(ex.Message);
+                throw;
             }
         }
     }

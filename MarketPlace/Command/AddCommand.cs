@@ -19,7 +19,7 @@ namespace MarketPlace.Client.Command
             : base(basketMV)
         {
         }
-
+        
         public override bool CanExecute(object parameter)
         {
             return true;
@@ -27,6 +27,10 @@ namespace MarketPlace.Client.Command
         public override void Execute(object parameter)
         {
             string code = parameter as string;
+
+            if (string.IsNullOrEmpty(code))
+                return;
+
             Product product = BasketVM.dataContext.GetProduct(code);
             if (product != null)
             {

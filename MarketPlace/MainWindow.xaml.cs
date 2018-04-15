@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using MarketPlace.Client.ModelView;
 using MarketPlace.Client.DataContext;
 using System.Windows.Threading;
+using MarketPlace.Model;
 
 namespace MarketPlace
 {
@@ -27,9 +28,30 @@ namespace MarketPlace
         public MainWindow()
         {
             InitializeComponent();
-            //DataContext = new BasketViewModel(new DbDataContext( new DataManager(new ProductRepositoryBySqliteNet(), new PurchaseRepositoryBySqliteNet()))));
+
+            // Использование сервиса. Pаботает с IIS
             DataContext = new BasketViewModel(new WcfDataContext());
+
+            // Использование сервиса. Работает с отдельным хостом
             //DataContext = new BasketViewModel(new WcfSelfHostDataContext());
+
+            /*
+             * Для прямого подключения приложения к БД. 
+             * 
+            string dbPathName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string dbFileName = "database.sqlite";
+            string databasePath = Path.Combine(dbPathName, dbFileName);
+
+            //Реализация с использованием Sqlite-net-pcl
+            DataManager dataManager = new DataManager(new ProductRepositoryBySqliteNet(databasePath), new PurchaseRepositoryBySqliteNet(databasePath));
+            DataContext = new BasketViewModel(new DbDataContext(dataManager));*/
+
+            //Реализация с использованием System.Data.SQLite
+            /*SQLiteDatabase sqliteDatabase = new SQLiteDatabase(dbPathName, dbFileName);
+            IProductRepository productRepository = new ProductRepository(sqliteDatabase);
+            IPurchaseRepository purchaseRepository = new PurchaseRepository(sqliteDatabase);
+            this.dataManager = new DataManager(productRepository, purchaseRepository);
+            DataContext = new BasketViewModel(new DbDataContext(dataManager));*/
         }
     }
 }
