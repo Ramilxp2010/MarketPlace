@@ -40,8 +40,9 @@ namespace MarketPlace.DB.SqliteDB
                     return product;
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                //this.Logger.log(ex);
                 throw;
             }
         }
@@ -56,8 +57,9 @@ namespace MarketPlace.DB.SqliteDB
                     db.Close();
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                //this.Logger.log(ex);
                 throw;
             }
         }
@@ -73,8 +75,9 @@ namespace MarketPlace.DB.SqliteDB
                     return products;
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                //this.Logger.log(ex);
                 throw;
             }
         }

@@ -39,8 +39,9 @@ namespace MarketPlace.DB.Implement
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                //this.Logger.log(ex);
                 throw;
             }
             finally
@@ -71,8 +72,9 @@ namespace MarketPlace.DB.Implement
                 }
                 return purchase;
             }
-            catch
+            catch (Exception ex)
             {
+                //this.Logger.log(ex);
                 throw;
             }
             finally
@@ -93,8 +95,9 @@ namespace MarketPlace.DB.Implement
                     cmd.ExecuteNonQuery();
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                //this.Logger.log(ex);
                 throw;
             }
             finally
@@ -121,8 +124,9 @@ namespace MarketPlace.DB.Implement
                     cmd.ExecuteNonQuery();
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                //this.Logger.log(ex);
                 throw;
             }
             finally

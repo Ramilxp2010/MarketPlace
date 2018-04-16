@@ -26,13 +26,13 @@ namespace MarketPlace.Service.IISWcfService
             string databasePath = Path.Combine(dbPathName, dbFileName);
             
             //Реализация с использованием Sqlite-net-pcl
-            this.dataManager = new DataManager(new ProductRepositoryBySqliteNet(databasePath), new PurchaseRepositoryBySqliteNet(databasePath));
+            //this.dataManager = new DataManager(new ProductRepositoryBySqliteNet(databasePath), new PurchaseRepositoryBySqliteNet(databasePath));
             
             //Реализация с использованием System.Data.SQLite
-            /*SQLiteDatabase sqliteDatabase = new SQLiteDatabase(dbPathName, dbFileName);
+            SQLiteDatabase sqliteDatabase = new SQLiteDatabase(dbPathName, dbFileName);
             IProductRepository productRepository = new ProductRepository(sqliteDatabase);
             IPurchaseRepository purchaseRepository = new PurchaseRepository(sqliteDatabase);
-            this.dataManager = new DataManager(productRepository, purchaseRepository);*/
+            this.dataManager = new DataManager(productRepository, purchaseRepository);
         }
 
         public Product GetProduct(string id)

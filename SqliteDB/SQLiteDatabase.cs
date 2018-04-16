@@ -59,10 +59,10 @@ namespace MarketPlace.DB
 
                     return connection.State == System.Data.ConnectionState.Open;
                 }
-                catch (Exception exp)
+                catch (Exception ex)
                 {
-                    this.Exception = exp;
-                    throw new Exception(exp.Message);
+                    //this.Logger.log(ex);
+                    throw;
                 }
             }
         }
@@ -81,10 +81,10 @@ namespace MarketPlace.DB
 
                 connection.Open();
             }
-            catch (Exception exp)
+            catch (Exception ex)
             {
-                this.Exception = exp;
-                throw new Exception(exp.Message);
+                //this.Logger.log(ex);
+                throw;
             }
         }
 
@@ -97,10 +97,10 @@ namespace MarketPlace.DB
 
                 connection = null;
             }
-            catch (Exception exp)
+            catch (Exception ex)
             {
-                this.Exception = exp;
-                throw new Exception(exp.Message);
+                //this.Logger.log(ex);
+                throw;
             }
         }
 
