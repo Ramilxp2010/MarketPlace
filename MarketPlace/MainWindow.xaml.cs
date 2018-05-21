@@ -37,7 +37,6 @@ namespace MarketPlace
 
             /*
              * Для прямого подключения приложения к БД. 
-             * 
             string dbPathName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string dbFileName = "database.sqlite";
             string databasePath = Path.Combine(dbPathName, dbFileName);
