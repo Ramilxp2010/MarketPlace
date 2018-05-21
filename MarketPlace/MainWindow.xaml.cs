@@ -35,7 +35,7 @@ namespace MarketPlace
             // Использование сервиса. Работает с отдельным хостом
             //DataContext = new BasketViewModel(new WcfSelfHostDataContext());
 
-            /*
+            /*sadasdasd
             Для прямого подключения приложения к БД. dsfsdf
             string dbPathName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string dbFileName = "database.sqlite";
